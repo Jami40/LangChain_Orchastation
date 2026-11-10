@@ -13,6 +13,9 @@ GROQ_API_KEY=your_groq_api_key
 ```
 
 The notebook uses LangChain's `ChatGroq` integration.
+Run the notebook from the repository workspace so it can find the root `.env`
+file. If you opened a copied notebook outside this repository, open the
+tracked notebook from `Langchain_2` instead.
 
 Install the module dependencies from `Langchain_1/requirements.txt`, then open
 [`02_talk_with_llm_part2.ipynb`](./02_talk_with_llm_part2.ipynb) and run the
