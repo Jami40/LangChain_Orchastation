@@ -14,6 +14,7 @@ entire repository.
 |---|---|---|---|
 | [`Langchain_1`](./Langchain_1/) | LLM calls, streaming, temperature, chat messages, and provider integrations | OpenAI + Groq | [`01_talk_with_llm.ipynb`](./Langchain_1/01_talk_with_llm.ipynb) |
 | [`Langchain_2`](./Langchain_2/) | Prompt templates, few-shot prompting, chains, LCEL, and output parsers | Groq | [`02_talk_with_llm_part2.ipynb`](./Langchain_2/02_talk_with_llm_part2.ipynb) |
+| [`Langchain_3`](./Langchain_3/) | Document loaders for TXT, CSV, HTML, and PDF files | LangChain Community | [`DataLoader_RAG_Implementation.ipynb`](./Langchain_3/DataLoader_RAG_Implementation.ipynb) |
 | More modules coming soon | RAG, agents, tools, memory, and deployment | — | — |
 
 ## 🧠 Concepts covered
@@ -42,6 +43,9 @@ LangChain/
 │   ├── 02_talk_with_llm_part2.ipynb
 │   ├── requirements.txt
 │   └── .gitkeep
+├── Langchain_3/
+│   ├── DataLoader_RAG_Implementation.ipynb
+│   └── data/
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
