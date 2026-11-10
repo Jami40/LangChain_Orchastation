@@ -12,7 +12,8 @@ From the repository root, add your key to `.env`:
 GROQ_API_KEY=your_groq_api_key
 ```
 
-The notebook uses LangChain's `ChatGroq` integration.
+The notebook uses LangChain's `ChatGroq` integration with the
+`openai/gpt-oss-120b` model available through your Groq account.
 Run the notebook from the repository workspace so it can find the root `.env`
 file. If you opened a copied notebook outside this repository, open the
 tracked notebook from `Langchain_2` instead.
