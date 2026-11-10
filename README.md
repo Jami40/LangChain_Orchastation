@@ -3,17 +3,17 @@
 > Hands-on notebooks for learning LangChain, chat models, prompt engineering,
 > chains, and structured LLM output.
 
-This repository is a growing collection of practical LangChain modules. Each
-module is self-contained and focuses on one stage of building generative AI
-applications—from the first model call to reusable prompt pipelines and
-structured responses.
+This repository is a growing collection of practical LangChain modules. Each module is self-contained and focuses on one stage of building generative
+AI applications—from the first model call to reusable prompt pipelines and
+structured responses. This root README is the central documentation for the
+entire repository.
 
 ## 🌟 Learning path
 
 | Module | Focus | Main provider | Start here |
 |---|---|---|---|
-| [`Langchain_1`](./Langchain_1/) | LLM calls, streaming, temperature, chat messages, and provider integrations | OpenAI + Groq | [`README.md`](./Langchain_1/README.md) |
-| [`Langchain_2`](./Langchain_2/) | Prompt templates, few-shot prompting, chains, LCEL, and output parsers | Groq | [`README.md`](./Langchain_2/README.md) |
+| [`Langchain_1`](./Langchain_1/) | LLM calls, streaming, temperature, chat messages, and provider integrations | OpenAI + Groq | [`01_talk_with_llm.ipynb`](./Langchain_1/01_talk_with_llm.ipynb) |
+| [`Langchain_2`](./Langchain_2/) | Prompt templates, few-shot prompting, chains, LCEL, and output parsers | Groq | [`02_talk_with_llm_part2.ipynb`](./Langchain_2/02_talk_with_llm_part2.ipynb) |
 | More modules coming soon | RAG, agents, tools, memory, and deployment | — | — |
 
 ## 🧠 Concepts covered
@@ -38,11 +38,10 @@ LangChain/
 │   ├── 01_talk_with_llm.ipynb
 │   ├── GENAI_Langchain_1.pdf
 │   ├── requirements.txt
-│   └── README.md
 ├── Langchain_2/
 │   ├── 02_talk_with_llm_part2.ipynb
 │   ├── requirements.txt
-│   └── README.md
+│   └── .gitkeep
 ├── .env.example
 ├── .gitignore
 └── README.md
@@ -111,6 +110,9 @@ Open the module notebook in VS Code or Jupyter:
 
 In VS Code, choose the same Python environment where the dependencies were
 installed, restart the notebook kernel, and run cells from top to bottom.
+
+> Documentation is maintained in this root README. The module folders contain
+> notebooks and their dependency files only.
 
 ## 🔧 Current Groq model
 
