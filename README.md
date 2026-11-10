@@ -51,9 +51,22 @@ Start here:
 
 ## 🔐 Security
 
-Never commit API keys or private credentials. Store them in a local `.env`
-file. The repository `.gitignore` excludes common secret files and notebook
-temporary folders.
+Create one repository-level `.env` file for shared provider credentials. Use
+[`.env.example`](./.env.example) as the template:
+
+```bash
+copy .env.example .env
+```
+
+Then add your local keys:
+
+```env
+OPENAI_API_KEY=your_openai_api_key
+GROQ_API_KEY=your_groq_api_key
+```
+
+Never commit API keys or private credentials. The real `.env` file is ignored
+by Git, while `.env.example` is safe to share.
 
 ## ⚠️ Responsible use
 
