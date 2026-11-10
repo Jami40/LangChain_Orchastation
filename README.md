@@ -62,14 +62,14 @@ copy .env.example .env
 Then add your local keys:
 
 ```env
-XAI_API_KEY=your_xai_api_key
+GROQ_API_KEY=your_groq_api_key
 ```
 
 Never commit API keys or private credentials. The real `.env` file is ignored
 by Git, while `.env.example` is safe to share.
 
-`Langchain_2` uses xAI's OpenAI-compatible API endpoint at
-`https://api.x.ai/v1` and the `XAI_API_KEY` environment variable.
+`Langchain_2` uses Groq through LangChain's `ChatGroq` integration and the
+`GROQ_API_KEY` environment variable.
 
 ## ⚠️ Responsible use
 

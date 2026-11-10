@@ -2,21 +2,17 @@
 
 This module explores LangChain prompt templates, chat prompts, few-shot
 prompting, chains, LangChain Expression Language, and output parsers using
-xAI's Grok models.
+Groq chat models.
 
 ## Setup
 
 From the repository root, add your key to `.env`:
 
 ```env
-XAI_API_KEY=your_xai_api_key
+GROQ_API_KEY=your_groq_api_key
 ```
 
-The notebook uses xAI's OpenAI-compatible endpoint:
-
-```text
-https://api.x.ai/v1
-```
+The notebook uses LangChain's `ChatGroq` integration.
 
 Install the module dependencies from `Langchain_1/requirements.txt`, then open
 [`02_talk_with_llm_part2.ipynb`](./02_talk_with_llm_part2.ipynb) and run the
