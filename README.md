@@ -42,6 +42,7 @@ LangChain/
 │   ├── 02_talk_with_llm_part2.ipynb
 │   ├── requirements.txt
 │   └── .gitkeep
+├── requirements.txt
 ├── .env.example
 ├── .gitignore
 └── README.md
@@ -70,18 +71,13 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 3. Install module dependencies
+### 3. Install all dependencies
 
-For the first module:
-
-```powershell
-python -m pip install -r .\Langchain_1\requirements.txt
-```
-
-For the second module:
+Install the shared root requirements once. This covers the current and future
+notebooks that use the repository environment:
 
 ```powershell
-python -m pip install -r .\Langchain_2\requirements.txt
+python -m pip install -r .\requirements.txt
 ```
 
 ### 4. Configure Groq
@@ -136,7 +132,7 @@ and update the notebook model name.
 Install dependencies into the environment selected by the notebook:
 
 ```powershell
-python -m pip install -r .\Langchain_2\requirements.txt
+python -m pip install -r .\requirements.txt
 ```
 
 ### `GROQ_API_KEY` is missing
