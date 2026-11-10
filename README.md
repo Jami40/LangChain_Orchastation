@@ -71,14 +71,26 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
+Confirm that the selected interpreter is Python 3.11 before installing:
+
+```powershell
+python --version
+```
+
 ### 3. Install all dependencies
 
-Install the shared root requirements once. This covers the current and future
-notebooks that use the repository environment:
+Install the shared root requirements once. This covers the current notebooks:
 
 ```powershell
 python -m pip install -r .\requirements.txt
 ```
+
+If `python --version` shows Python 3.13 or another version, select the
+`llmapp` interpreter in VS Code first. This pinned LangChain learning stack is
+tested with Python 3.11.
+
+When a future module introduces a new import, add its package to this root
+file and reinstall it in the same environment.
 
 ### 4. Configure Groq
 
