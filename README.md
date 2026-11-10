@@ -12,6 +12,7 @@ notebook, dependencies, and documentation where appropriate.
 | Module | Topics | Guide |
 |---|---|---|
 | [`Langchain_1`](./Langchain_1/) | LLM completion, streaming, temperature, chat models, OpenAI, and Groq | [`README.md`](./Langchain_1/README.md) |
+| [`Langchain_2`](./Langchain_2/) | Prompt templates, few-shot prompting, chains, and output parsers with xAI Grok | [`02_talk_with_llm_part2.ipynb`](./Langchain_2/02_talk_with_llm_part2.ipynb) |
 | *More modules coming soon* | Additional LangChain concepts and projects | — |
 
 ## 🗂️ Repository structure
@@ -61,12 +62,14 @@ copy .env.example .env
 Then add your local keys:
 
 ```env
-OPENAI_API_KEY=your_openai_api_key
-GROQ_API_KEY=your_groq_api_key
+XAI_API_KEY=your_xai_api_key
 ```
 
 Never commit API keys or private credentials. The real `.env` file is ignored
 by Git, while `.env.example` is safe to share.
+
+`Langchain_2` uses xAI's OpenAI-compatible API endpoint at
+`https://api.x.ai/v1` and the `XAI_API_KEY` environment variable.
 
 ## ⚠️ Responsible use
 
