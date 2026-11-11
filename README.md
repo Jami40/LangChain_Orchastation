@@ -1,7 +1,7 @@
 # 🦜🔗 LangChain Learning Lab
 
 > Hands-on notebooks for learning LangChain, chat models, prompt engineering,
-> chains, and structured LLM output.
+> chains, structured output, document loading, vector stores, retrieval, and RAG.
 
 This repository is a growing collection of practical LangChain modules. Each module is self-contained and focuses on one stage of building generative
 AI applications—from the first model call to reusable prompt pipelines and
@@ -14,8 +14,7 @@ entire repository.
 |---|---|---|---|
 | [`Langchain_1`](./Langchain_1/) | LLM calls, streaming, temperature, chat messages, and provider integrations | OpenAI + Groq | [`01_talk_with_llm.ipynb`](./Langchain_1/01_talk_with_llm.ipynb) |
 | [`Langchain_2`](./Langchain_2/) | Prompt templates, few-shot prompting, chains, LCEL, and output parsers | Groq | [`02_talk_with_llm_part2.ipynb`](./Langchain_2/02_talk_with_llm_part2.ipynb) |
-| [`Langchain_3`](./Langchain_3/) | Document loaders for TXT, CSV, HTML, and PDF files | LangChain Community | [`DataLoader_RAG_Implementation.ipynb`](./Langchain_3/DataLoader_RAG_Implementation.ipynb) |
-| More modules coming soon | RAG, agents, tools, memory, and deployment | — | — |
+| [`Langchain_3`](./Langchain_3/) | Document loaders, text splitting, embeddings, vector stores, retrievers, and RAG | Groq + OpenAI | [`DataLoader_RAG_Implementation.ipynb`](./Langchain_3/DataLoader_RAG_Implementation.ipynb) |
 
 ## 🧠 Concepts covered
 
@@ -29,6 +28,12 @@ entire repository.
 - **LangChain Expression Language (LCEL)** using runnable pipelines
 - **JSON output parsing**
 - **Pydantic-based structured output**
+- **Document loading** from TXT, CSV, HTML, PDF, and Wikipedia
+- **Text splitting** with character-based and recursive splitters
+- **Embeddings** with OpenAI
+- **Vector stores** with Chroma and FAISS
+- **Similarity retrieval** with configurable result counts
+- **Retrieval-Augmented Generation (RAG)** with LCEL
 - Secure environment-variable loading with `python-dotenv`
 
 ## 📁 Repository structure
@@ -45,6 +50,8 @@ LangChain/
 │   └── .gitkeep
 ├── Langchain_3/
 │   ├── DataLoader_RAG_Implementation.ipynb
+│   ├── RAG_component.ipynb
+│   ├── RAG_Implementation.ipynb
 │   └── data/
 ├── requirements.txt
 ├── .env.example
@@ -81,12 +88,21 @@ Confirm that the selected interpreter is Python 3.11 before installing:
 python --version
 ```
 
-### 3. Install all dependencies
+### 3. Install dependencies
 
-Install the shared root requirements once. This covers the current notebooks:
+Install the shared requirements:
 
 ```powershell
 python -m pip install -r .\requirements.txt
+```
+
+The notebooks in `Langchain_3` also use the packages listed in
+[`Langchain_1/requirements.txt`](./Langchain_1/requirements.txt), including
+the Chroma and PDF integrations. Install that file as well when running the
+vector-store and PDF examples:
+
+```powershell
+python -m pip install -r .\Langchain_1\requirements.txt
 ```
 
 If `python --version` shows Python 3.13 or another version, select the
@@ -96,7 +112,7 @@ tested with Python 3.11.
 When a future module introduces a new import, add its package to this root
 file and reinstall it in the same environment.
 
-### 4. Configure Groq
+### 4. Configure provider keys
 
 Create a root `.env` file from the template:
 
@@ -108,10 +124,14 @@ Add your key:
 
 ```env
 GROQ_API_KEY=your_groq_api_key
+OPENAI_API_KEY=your_openai_api_key
 ```
 
-The `GROQ_API_KEY` is loaded locally and is never committed. Create a key from
-the [Groq Console](https://console.groq.com/).
+`GROQ_API_KEY` is used by the chat and document-loader examples. The RAG
+implementation uses `OPENAI_API_KEY` for OpenAI embeddings and `ChatOpenAI`.
+Both keys are loaded locally and are never committed. Create keys from the
+[Groq Console](https://console.groq.com/) and
+[OpenAI platform](https://platform.openai.com/api-keys).
 
 ### 5. Open a notebook
 
@@ -119,16 +139,20 @@ Open the module notebook in VS Code or Jupyter:
 
 - [`01_talk_with_llm.ipynb`](./Langchain_1/01_talk_with_llm.ipynb)
 - [`02_talk_with_llm_part2.ipynb`](./Langchain_2/02_talk_with_llm_part2.ipynb)
+- [`DataLoader_RAG_Implementation.ipynb`](./Langchain_3/DataLoader_RAG_Implementation.ipynb)
+- [`RAG_component.ipynb`](./Langchain_3/RAG_component.ipynb)
+- [`RAG_Implementation.ipynb`](./Langchain_3/RAG_Implementation.ipynb)
 
 In VS Code, choose the same Python environment where the dependencies were
 installed, restart the notebook kernel, and run cells from top to bottom.
 
-> Documentation is maintained in this root README. The module folders contain
-> notebooks and their dependency files only.
+The Langchain_3 notebooks expect the working directory to be
+`Langchain_3` when relative paths such as `./data/...` are used. Select that
+folder as the notebook root, or adjust the paths for your environment.
 
-## 🔧 Current Groq model
+## 🔧 Current models
 
-`Langchain_2` uses:
+`Langchain_2` and the loader examples use Groq:
 
 ```python
 ChatGroq(
@@ -140,6 +164,18 @@ ChatGroq(
 Provider model availability can change. If Groq returns a `model_not_found`
 error, check the [current Groq model list](https://console.groq.com/docs/models)
 and update the notebook model name.
+
+`Langchain_3/RAG_Implementation.ipynb` uses OpenAI for both embeddings and the
+chat model:
+
+```python
+OpenAIEmbeddings()
+ChatOpenAI()
+```
+
+The notebook builds a FAISS index from a text document, retrieves relevant
+chunks, and combines the retriever, prompt, model, and string parser into an
+LCEL chain.
 
 ## 🛠️ Troubleshooting
 
@@ -157,6 +193,20 @@ python -m pip install -r .\requirements.txt
 - Confirm the variable is exactly `GROQ_API_KEY`.
 - Restart the notebook kernel after editing `.env`.
 - Never add quotation marks or spaces around the variable name.
+
+### `OPENAI_API_KEY` is missing
+
+- Add `OPENAI_API_KEY` to the root `.env` file.
+- Confirm the notebook is using the environment where `python-dotenv` is installed.
+- Restart the notebook kernel after editing `.env`.
+
+### `ModuleNotFoundError: No module named 'langchain_chroma'`
+
+Install the module-specific requirements before running the Chroma examples:
+
+```powershell
+python -m pip install -r .\Langchain_1\requirements.txt
+```
 
 ### `model_not_found`
 
