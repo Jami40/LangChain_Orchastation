@@ -15,6 +15,7 @@ entire repository.
 | [`Langchain_1`](./Langchain_1/) | LLM calls, streaming, temperature, chat messages, and provider integrations | OpenAI + Groq | [`01_talk_with_llm.ipynb`](./Langchain_1/01_talk_with_llm.ipynb) |
 | [`Langchain_2`](./Langchain_2/) | Prompt templates, few-shot prompting, chains, LCEL, and output parsers | Groq | [`02_talk_with_llm_part2.ipynb`](./Langchain_2/02_talk_with_llm_part2.ipynb) |
 | [`Langchain_3`](./Langchain_3/) | Document loaders, text splitting, embeddings, vector stores, retrievers, and RAG | Groq + OpenAI | [`DataLoader_RAG_Implementation.ipynb`](./Langchain_3/DataLoader_RAG_Implementation.ipynb) |
+| [`Langchain_4`](./Langchain_4/) | LCEL composition, built-in runnables, and retrieval chains | Groq + OpenAI | [`LCEL.ipynb`](./Langchain_4/LCEL.ipynb) |
 
 ## 🧠 Concepts covered
 
@@ -26,6 +27,11 @@ entire repository.
 - **Few-shot prompting** with examples
 - **Chains** that connect prompts, models, and parsers
 - **LangChain Expression Language (LCEL)** using runnable pipelines
+- **Built-in runnables** including `RunnablePassthrough`, `RunnableLambda`, and
+  `RunnableParallel`
+- **Dictionary-based chain inputs** with `itemgetter`
+- **Composable retrieval chains** that pass context, questions, and extra
+  instructions through one pipeline
 - **JSON output parsing**
 - **Pydantic-based structured output**
 - **Document loading** from TXT, CSV, HTML, PDF, and Wikipedia
@@ -53,6 +59,10 @@ LangChain/
 │   ├── RAG_component.ipynb
 │   ├── RAG_Implementation.ipynb
 │   └── data/
+├── Langchain_4/
+│   ├── LCEL.ipynb
+│   ├── LCEL_builtin_runnables.ipynb
+│   └── LCEL_GenAI.pdf
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
@@ -142,6 +152,8 @@ Open the module notebook in VS Code or Jupyter:
 - [`DataLoader_RAG_Implementation.ipynb`](./Langchain_3/DataLoader_RAG_Implementation.ipynb)
 - [`RAG_component.ipynb`](./Langchain_3/RAG_component.ipynb)
 - [`RAG_Implementation.ipynb`](./Langchain_3/RAG_Implementation.ipynb)
+- [`LCEL.ipynb`](./Langchain_4/LCEL.ipynb)
+- [`LCEL_builtin_runnables.ipynb`](./Langchain_4/LCEL_builtin_runnables.ipynb)
 
 In VS Code, choose the same Python environment where the dependencies were
 installed, restart the notebook kernel, and run cells from top to bottom.
@@ -176,6 +188,23 @@ ChatOpenAI()
 The notebook builds a FAISS index from a text document, retrieves relevant
 chunks, and combines the retriever, prompt, model, and string parser into an
 LCEL chain.
+
+## 🔗 LCEL runnable examples
+
+`Langchain_4` builds on the earlier RAG work with small, composable runnable
+examples:
+
+- `RunnablePassthrough` forwards the original input unchanged.
+- `RunnableLambda` wraps a custom Python function for use in a chain.
+- `RunnableParallel` computes multiple named values from the same input.
+- `itemgetter` selects fields from dictionary inputs before passing them to a
+  retriever or prompt.
+
+The advanced example combines a FAISS retriever, `RunnableParallel`,
+`ChatPromptTemplate`, `ChatOpenAI`, and `StrOutputParser`. It accepts a
+question and a requested language, retrieves context for the question, and
+returns the answer in that language. `LCEL.ipynb` also contrasts the modern
+`prompt | model | parser` style with the deprecated `LLMChain` API.
 
 ## 🛠️ Troubleshooting
 
