@@ -16,7 +16,7 @@ entire repository.
 | [`Langchain_2`](./Langchain_2/) | Prompt templates, few-shot prompting, chains, LCEL, and output parsers | Groq | [`02_talk_with_llm_part2.ipynb`](./Langchain_2/02_talk_with_llm_part2.ipynb) |
 | [`Langchain_3`](./Langchain_3/) | Document loaders, text splitting, embeddings, vector stores, retrievers, and RAG | Groq + OpenAI | [`DataLoader_RAG_Implementation.ipynb`](./Langchain_3/DataLoader_RAG_Implementation.ipynb) |
 | [`Langchain_4`](./Langchain_4/) | LCEL composition, built-in runnables, and retrieval chains | Groq + OpenAI | [`LCEL.ipynb`](./Langchain_4/LCEL.ipynb) |
-| [`LangChain_5`](./LangChain_5/) | Advanced LCEL composition, web RAG, and conversation memory | Groq + OpenAI | [`LCEL_little_more.ipynb`](./LangChain_5/LCEL_little_more.ipynb) |
+| [`LangChain_5`](./LangChain_5/) | Advanced LCEL composition, web RAG, and conversational memory | Groq + OpenAI | [`LCEL_little_more.ipynb`](./LangChain_5/LCEL_little_more.ipynb) |
 
 ## 🧠 Concepts covered
 
@@ -228,9 +228,16 @@ returns the answer in that language. `LCEL.ipynb` also contrasts the modern
   OpenAI embeddings, and a prompt pulled from LangChain Hub
 
 `LangChain_5/Memory_langchain.ipynb` demonstrates conversational state with
-`ConversationBufferMemory`, `ConversationBufferWindowMemory`, and
-`ChatMessageHistory`. Buffer memory retains the full conversation, while
-window memory limits history to a configured number of exchanges.
+Groq and chat prompts that include a `MessagesPlaceholder` for history. It
+covers:
+
+- `ConversationBufferMemory` with `LLMChain` for retaining the full
+  conversation
+- `ConversationBufferWindowMemory` with a two-exchange history limit
+- `ChatMessageHistory` for manually storing user and assistant messages
+
+The notebook uses the `chat_history` memory key to connect stored messages to
+the prompt template.
 
 ## 🛠️ Troubleshooting
 
