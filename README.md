@@ -16,6 +16,7 @@ entire repository.
 | [`Langchain_2`](./Langchain_2/) | Prompt templates, few-shot prompting, chains, LCEL, and output parsers | Groq | [`02_talk_with_llm_part2.ipynb`](./Langchain_2/02_talk_with_llm_part2.ipynb) |
 | [`Langchain_3`](./Langchain_3/) | Document loaders, text splitting, embeddings, vector stores, retrievers, and RAG | Groq + OpenAI | [`DataLoader_RAG_Implementation.ipynb`](./Langchain_3/DataLoader_RAG_Implementation.ipynb) |
 | [`Langchain_4`](./Langchain_4/) | LCEL composition, built-in runnables, and retrieval chains | Groq + OpenAI | [`LCEL.ipynb`](./Langchain_4/LCEL.ipynb) |
+| [`LangChain_5`](./LangChain_5/) | Advanced LCEL composition, web RAG, and conversation memory | Groq + OpenAI | [`LCEL_little_more.ipynb`](./LangChain_5/LCEL_little_more.ipynb) |
 
 ## 🧠 Concepts covered
 
@@ -32,6 +33,8 @@ entire repository.
 - **Dictionary-based chain inputs** with `itemgetter`
 - **Composable retrieval chains** that pass context, questions, and extra
   instructions through one pipeline
+- **Runnable configuration** with `.bind(...)`
+- **Nested and composed LCEL chains**
 - **JSON output parsing**
 - **Pydantic-based structured output**
 - **Document loading** from TXT, CSV, HTML, PDF, and Wikipedia
@@ -40,6 +43,9 @@ entire repository.
 - **Vector stores** with Chroma and FAISS
 - **Similarity retrieval** with configurable result counts
 - **Retrieval-Augmented Generation (RAG)** with LCEL
+- **Web-based RAG** with `WebBaseLoader`, Chroma, and hub prompts
+- **Conversation memory** with buffer memory, window memory, and message
+  history
 - Secure environment-variable loading with `python-dotenv`
 
 ## 📁 Repository structure
@@ -63,6 +69,9 @@ LangChain/
 │   ├── LCEL.ipynb
 │   ├── LCEL_builtin_runnables.ipynb
 │   └── LCEL_GenAI.pdf
+├── LangChain_5/
+│   ├── LCEL_little_more.ipynb
+│   └── Memory_langchain.ipynb
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
@@ -154,13 +163,15 @@ Open the module notebook in VS Code or Jupyter:
 - [`RAG_Implementation.ipynb`](./Langchain_3/RAG_Implementation.ipynb)
 - [`LCEL.ipynb`](./Langchain_4/LCEL.ipynb)
 - [`LCEL_builtin_runnables.ipynb`](./Langchain_4/LCEL_builtin_runnables.ipynb)
+- [`LCEL_little_more.ipynb`](./LangChain_5/LCEL_little_more.ipynb)
+- [`Memory_langchain.ipynb`](./LangChain_5/Memory_langchain.ipynb)
 
 In VS Code, choose the same Python environment where the dependencies were
 installed, restart the notebook kernel, and run cells from top to bottom.
 
-The Langchain_3 notebooks expect the working directory to be
-`Langchain_3` when relative paths such as `./data/...` are used. Select that
-folder as the notebook root, or adjust the paths for your environment.
+The Langchain_3 notebooks expect the working directory to be `Langchain_3`
+when relative paths such as `./data/...` are used. Select that folder as the
+notebook root, or adjust the paths for your environment.
 
 ## 🔧 Current models
 
@@ -205,6 +216,21 @@ The advanced example combines a FAISS retriever, `RunnableParallel`,
 question and a requested language, retrieves context for the question, and
 returns the answer in that language. `LCEL.ipynb` also contrasts the modern
 `prompt | model | parser` style with the deprecated `LLMChain` API.
+
+## 🧩 Advanced LCEL and memory examples
+
+`LangChain_5/LCEL_little_more.ipynb` extends the runnable patterns with:
+
+- `.bind(...)` for adding model arguments to a runnable
+- Chains composed from the outputs of other chains
+- `itemgetter` for mapping selected input fields into nested chains
+- A web RAG pipeline using `WebBaseLoader`, recursive splitting, Chroma,
+  OpenAI embeddings, and a prompt pulled from LangChain Hub
+
+`LangChain_5/Memory_langchain.ipynb` demonstrates conversational state with
+`ConversationBufferMemory`, `ConversationBufferWindowMemory`, and
+`ChatMessageHistory`. Buffer memory retains the full conversation, while
+window memory limits history to a configured number of exchanges.
 
 ## 🛠️ Troubleshooting
 
