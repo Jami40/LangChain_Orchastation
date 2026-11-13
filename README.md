@@ -239,6 +239,26 @@ covers:
 The notebook uses the `chat_history` memory key to connect stored messages to
 the prompt template.
 
+## 🌈 LangServe translator frontend
+
+`Langchain_6/langserve_Implementation.py` exposes the translation chain
+through FastAPI and LangServe, with a colourful browser interface for entering
+text, selecting a target language, and viewing the translated result.
+
+Start the server from the project root:
+
+```bash
+python Langchain_6/langserve_Implementation.py
+```
+
+Then open the frontend at [http://localhost:8000/](http://localhost:8000/).
+The API documentation is available at
+[http://localhost:8000/docs/](http://localhost:8000/docs/), and the LangServe
+playground is available at
+[http://localhost:8000/chain/playground/](http://localhost:8000/chain/playground/).
+
+![Rainbow Translator frontend](./assets/rainbow-translator.png)
+
 ## 🛠️ Troubleshooting
 
 ### `ModuleNotFoundError: No module named 'dotenv'`
@@ -274,6 +294,12 @@ python -m pip install -r .\Langchain_1\requirements.txt
 
 The API key is working, but the selected model is unavailable to the account.
 Use an active model listed in the Groq Console.
+
+### `Address already in use` on port 8000
+
+Another server instance is already running on port 8000. Reuse
+[http://localhost:8000/](http://localhost:8000/), or stop the existing process
+before starting the server again.
 
 ## 🔐 Security
 
