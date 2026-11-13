@@ -1,4 +1,5 @@
 import os
+import sys
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_groq import ChatGroq
@@ -7,6 +8,8 @@ from fastapi import FastAPI
 from langserve import add_routes
 import uvicorn
 
+
+sys.stdout.reconfigure(encoding="utf-8")
 
 _ = load_dotenv(find_dotenv())
 groq_api_key = os.environ["GROQ_API_KEY"]
